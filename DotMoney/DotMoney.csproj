@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>dakuenjery@gmail.com</Authors>
+    <PackageTags>money, currency, decimal, DotMoney,</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/dakuenjery/DotMoney</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/dakuenjery/DotMoney</RepositoryUrl>
+    <Description>C# Money Value Type</Description>
+    <Version>1.0.2</Version>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <FileVersion>1.0.2.0</FileVersion>
+  </PropertyGroup>
+
+</Project>
