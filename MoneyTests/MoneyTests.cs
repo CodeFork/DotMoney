@@ -1,123 +1,123 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-[TestClass]
+using Xunit;
 public class MoneyTests
 {
-    [TestMethod]
+    [Fact]
     public void CurrencyIsEqual()
     {
-        Currency cur1 = new Currency("BTC");
-        Currency cur2 = new Currency("BTC");
-        Assert.AreEqual<Currency>(cur1, cur2);
+        var cur1 = new Currency("BTC");
+        var cur2 = new Currency("BTC");
+
+        Assert.Equal(cur1, cur2);
     }
 
-    [TestMethod]
+    [Fact]
     public void CurrencyIsNotEqual()
     {
-        Currency cur1 = new Currency("HKD");
-        Currency cur2 = new Currency("BTC");
-        Assert.AreNotEqual<Currency>(cur1, cur2);
+        var cur1 = new Currency("HKD");
+        var cur2 = new Currency("BTC");
+
+        Assert.NotEqual(cur1, cur2);
     }
 
-    [TestMethod]
+    [Fact]
     public void MoneyCurrencyIsNotEqual()
     {
-        Money m1 = new Money(1m, "HKD");
-        Money m2 = new Money(1m, "MOP");
-        Assert.AreNotEqual<Money>(m1, m2);
+        var m1 = new Money(1m, "HKD");
+        var m2 = new Money(1m, "MOP");
+
+        Assert.NotEqual(m1, m2);
     }
 
-    [TestMethod]
+    [Fact]
     public void MoneyIsNotEqualAmount()
     {
-        Money m1 = new Money(1m, "HKD");
-        Money m2 = new Money(2m, "HKD");
-        Assert.AreNotEqual<Money>(m1, m2);
+        var m1 = new Money(1m, "HKD");
+        var m2 = new Money(2m, "HKD");
+
+        Assert.NotEqual(m1, m2);
     }
 
-    [TestMethod]
+    [Fact]
     public void MoneyIsEqual()
     {
-        Money m1 = new Money(1.00000001m, "BTC");
-        Money m2 = new Money(1.00000001m, "BTC");
-        Assert.AreEqual<Money>(m1, m2);
+        var m1 = new Money(1.00000001m, "BTC");
+        var m2 = new Money(1.00000001m, "BTC");
+
+        Assert.Equal(m1, m2);
     }
 
-    [TestMethod]
+    [Fact]
     public void MoneyAddMoney()
     {
-        Money m1 = new Money(1.00000001m, "BTC");
-        Money m2 = new Money(10.000000019m, "BTC");
+        var m1 = new Money(1.00000001m, "BTC");
+        var m2 = new Money(10.000000019m, "BTC");
+        var result = m1 + m2;
 
-        Money result = m1 + m2;
-        Assert.AreEqual<Money>(result, new Money(11.000000029m, "BTC"));
+        Assert.Equal(result, new Money(11.000000029m, "BTC"));
     }
 
-    [TestMethod]
+    [Fact]
     public void MoneyAddDecimal()
     {
-        Money m1 = new Money(1.00000001m, "BTC");
+        var m1 = new Money(1.00000001m, "BTC");
+        var result = m1 + 10.000000019m;
 
-        Money result = m1 + 10.000000019m;
-        if (result.Amount != 11.000000029m)
-            Assert.Fail();
+        Assert.True(result.Amount == 11.000000029m);
     }
 
-    [TestMethod]
+    [Fact]
     public void MoneySubtractMoney()
     {
-        Money m1 = new Money(1.00000001m, "MOP");
-        Money m2 = new Money(10.000000019m, "MOP");
+        var m1 = new Money(1.00000001m, "MOP");
+        var m2 = new Money(10.000000019m, "MOP");
+        var result = m2 - m1;
 
-        Money result = m2 - m1;
-        Assert.AreEqual<Money>(result, new Money(9.000000009m, "MOP"));
+        Assert.Equal(result, new Money(9.000000009m, "MOP"));
     }
 
-    [TestMethod]
+    [Fact]
     public void MoneySubtractDecimal()
     {
-        Money m1 = new Money(1.00000001m, "BTC");
+        var m1 = new Money(1.00000001m, "BTC");
+        var result = m1 - 10.000000019m;
 
-        Money result = m1 - 10.000000019m;
-        if (result.Amount != -9.000000009m)
-            Assert.Fail();
+        Assert.True(result.Amount == -9.000000009m);
     }
 
-    [TestMethod]
+    [Fact]
     public void MoneyMultiplyDecimal()
     {
-        Money m1 = new Money(1.02m, "MOP");
+        var m1 = new Money(1.02m, "MOP");
+        var result = m1 * 2.5m;
 
-        Money result = m1 * 2.5m;
-        Assert.AreEqual<Money>(result, new Money(2.55m, "MOP"));
+        Assert.Equal(result, new Money(2.55m, "MOP"));
     }
 
-    [TestMethod]
+    [Fact]
     public void MoneyMultiplyInt()
     {
-        Money m1 = new Money(1.000000014m, "BTC");
+        var m1 = new Money(1.000000014m, "BTC");
+        var result = m1 * 2;
 
-        Money result = m1 * 2;
-        if (result.Amount != 2.000000028m)
-            Assert.Fail();
+        Assert.True(result.Amount == 2.000000028m);
     }
 
-    [TestMethod]
+    [Fact]
     public void MoneyMultiplySmallDecimal()
     {
-        Money m1 = new Money(1.000000005m, "BTC");
+        var m1 = new Money(1.000000005m, "BTC");
+        var result = m1 * (5m/1000m);
 
-        Money result = m1 * (5m/1000m);
-        Assert.AreEqual<Money>(result, new Money(0.005000000025m, "BTC"));
+        Assert.Equal(result, new Money(0.005000000025m, "BTC"));
     }
 
-    [TestMethod]
+    [Fact]
     public void MoneyDividedByInt()
     {
-        Money m1 = new Money(2.5m, "BTC");
+        var m1 = new Money(2.5m, "BTC");
+        var result = m1 / 2;
 
-        Money result = m1 / 2;
-        Assert.AreEqual<Money>(result, new Money(1.25m, "BTC"));
+        Assert.Equal(result, new Money(1.25m, "BTC"));
     }
 }
