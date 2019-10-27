@@ -3,176 +3,155 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public sealed class Money : IEquatable<Money>, IComparable, IComparable<Money>
-{
-    public decimal Amount { get; private set; }
-    public readonly Currency Currency;
+namespace NetMoney {
+    public sealed class Money : IEquatable<Money>, IComparable, IComparable<Money> {
+        public decimal Amount { get; private set; }
+        public Currency Currency { get; }
 
-    public Money(decimal amount, Currency currency)
-    {
-        AssertNotNull(currency);
-        Amount = amount;
-        Currency = currency;
-    }
+        protected Money() { }
 
-    public Money(decimal amount, string isoCode)
-    {
-        Amount = amount;
-        Currency = new Currency(isoCode.ToUpper());
-        AssertNotNull(Currency);
-    }
-
-    #region Equatable and Operator ==, !=
-
-    public bool Equals(Money other)
-    {
-        if (other is null) return false;
-        if (ReferenceEquals(this, other)) return true;
-        return (Amount == other.Amount && Currency.Equals(other.Currency));
-    }
-
-    public override bool Equals(object obj)
-    {
-        if (obj is null) return false;
-        if (ReferenceEquals(this, obj)) return true;
-        if (obj.GetType() != typeof(Money)) return false;
-        return Equals((Money)obj);
-    }
-
-    public override int GetHashCode()
-    {
-        unchecked
-        {
-            return (Amount.GetHashCode() * 397) ^ Currency.GetHashCode();
+        public Money(decimal amount, Currency currency) {
+            AssertNotNull(currency);
+            Amount = amount;
+            Currency = currency;
         }
-    }
 
-    public static bool operator ==(Money left, Money right)
-    {
-        return Equals(left, right);
-    }
+        public Money(decimal amount, string isoCode) {
+            Amount = amount;
+            Currency = new Currency(isoCode.ToUpper());
+            AssertNotNull(Currency);
+        }
 
-    public static bool operator !=(Money left, Money right)
-    {
-        return !Equals(left, right);
-    }
+        #region Equatable and Operator ==, !=
 
-    #endregion
+        public bool Equals(Money other) {
+            if (other is null) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return (Amount == other.Amount && Currency.Equals(other.Currency));
+        }
 
-    #region Comparable and Operator >, <, >=, <=
+        public override bool Equals(object obj) {
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof(Money)) return false;
+            return Equals((Money)obj);
+        }
 
-    public int CompareTo(object obj)
-    {
-        if (obj == null) return 1;
-        if (!(obj is Money)) throw new ArgumentException("Object is not Money object");
+        public override int GetHashCode() {
+            unchecked {
+                return (Amount.GetHashCode() * 397) ^ Currency.GetHashCode();
+            }
+        }
 
-        return CompareTo((Money)obj);
-    }
+        public static bool operator ==(Money left, Money right) {
+            return Equals(left, right);
+        }
 
-    public int CompareTo(Money other)
-    {
-        if (other == null) return 1;
-        if (this < other) return -1;
-        if (this > other) return 1;
-        return 0;
-    }
+        public static bool operator !=(Money left, Money right) {
+            return !Equals(left, right);
+        }
 
-    public static bool operator >(Money left, Money right)
-    {
-        AssertSameCurrency(left, right);
-        return left.Amount > right.Amount;
-    }
+        #endregion
 
-    public static bool operator >=(Money left, Money right)
-    {
-        AssertSameCurrency(left, right);
-        return left.Amount >= right.Amount;
-    }
+        #region Comparable and Operator >, <, >=, <=
 
-    public static bool operator <(Money left, Money right)
-    {
-        AssertSameCurrency(left, right);
-        return left.Amount < right.Amount;
-    }
+        public int CompareTo(object obj) {
+            if (obj == null) return 1;
+            if (!(obj is Money)) throw new ArgumentException("Object is not Money object");
 
-    public static bool operator <=(Money left, Money right)
-    {
-        AssertSameCurrency(left, right);
-        return left.Amount <= right.Amount;
-    }
+            return CompareTo((Money)obj);
+        }
 
-    #endregion
+        public int CompareTo(Money other) {
+            if (other == null) return 1;
+            if (this < other) return -1;
+            if (this > other) return 1;
+            return 0;
+        }
 
-    #region Operator +, -
-    public static Money operator +(Money left, Money right)
-    {
-        AssertSameCurrency(left, right);
-        return new Money(left.Amount + right.Amount, left.Currency);
-    }
+        public static bool operator >(Money left, Money right) {
+            AssertSameCurrency(left, right);
+            return left.Amount > right.Amount;
+        }
 
-    public static Money operator +(Money left, decimal right)
-    {
-        AssertNotNull(left);
-        return new Money(left.Amount + right, left.Currency);
-    }
+        public static bool operator >=(Money left, Money right) {
+            AssertSameCurrency(left, right);
+            return left.Amount >= right.Amount;
+        }
 
-    public static Money operator -(Money left, Money right)
-    {
-        AssertSameCurrency(left, right);
-        return new Money(left.Amount - right.Amount, left.Currency);
-    }
+        public static bool operator <(Money left, Money right) {
+            AssertSameCurrency(left, right);
+            return left.Amount < right.Amount;
+        }
 
-    public static Money operator -(Money left, decimal right)
-    {
-        AssertNotNull(left);
-        return new Money(left.Amount - right, left.Currency);
-    }
+        public static bool operator <=(Money left, Money right) {
+            AssertSameCurrency(left, right);
+            return left.Amount <= right.Amount;
+        }
 
-    #endregion
+        #endregion
 
-    #region Operator *, /
+        #region Operator +, -
+        public static Money operator +(Money left, Money right) {
+            AssertSameCurrency(left, right);
+            return new Money(left.Amount + right.Amount, left.Currency);
+        }
 
-    public static Money operator *(Money left, decimal right)
-    {
-        AssertNotNull(left);
-        return new Money(left.Amount * right, left.Currency);
-    }
+        public static Money operator +(Money left, decimal right) {
+            AssertNotNull(left);
+            return new Money(left.Amount + right, left.Currency);
+        }
 
-    public static Money operator /(Money left, decimal right)
-    {
-        AssertNotNull(left);
-        return new Money(left.Amount / right, left.Currency);
-    }
+        public static Money operator -(Money left, Money right) {
+            AssertSameCurrency(left, right);
+            return new Money(left.Amount - right.Amount, left.Currency);
+        }
 
-    #endregion
+        public static Money operator -(Money left, decimal right) {
+            AssertNotNull(left);
+            return new Money(left.Amount - right, left.Currency);
+        }
 
-    #region Helper functions
-    public static void AssertNotNull(Money money)
-    {
-        if (money == null) throw new ArgumentNullException("Money Is Null");
-    }
+        #endregion
 
-    public static void AssertNotNull(Currency currency)
-    {
-        if (currency == null) throw new ArgumentNullException("Currency Is Null");
-    }
+        #region Operator *, /
 
-    public static void AssertSameCurrency(Money first, Money second)
-    {
-        if (first == null || second == null)
-            throw new ArgumentNullException("Any Money Is Null");
-        if (first.Currency != second.Currency)
-            throw new ArgumentException("Money Currency Not Equal");
-    }
-    #endregion
+        public static Money operator *(Money left, decimal right) {
+            AssertNotNull(left);
+            return new Money(left.Amount * right, left.Currency);
+        }
 
-    /// <summary>
-    /// Use the decorated interal Currency object to display the string
-    /// </summary>
-    /// 
-    /// <returns>string</returns>
-    public override string ToString()
-    {
-        return Currency.ToString(this);
+        public static Money operator /(Money left, decimal right) {
+            AssertNotNull(left);
+            return new Money(left.Amount / right, left.Currency);
+        }
+
+        #endregion
+
+        #region Helper functions
+        public static void AssertNotNull(Money money) {
+            if (money == null) throw new ArgumentNullException("Money Is Null");
+        }
+
+        public static void AssertNotNull(Currency currency) {
+            if (currency == null) throw new ArgumentNullException("Currency Is Null");
+        }
+
+        public static void AssertSameCurrency(Money first, Money second) {
+            if (first == null || second == null)
+                throw new ArgumentNullException("Any Money Is Null");
+            if (first.Currency != second.Currency)
+                throw new ArgumentException("Money Currency Not Equal");
+        }
+        #endregion
+
+        /// <summary>
+        /// Use the decorated interal Currency object to display the string
+        /// </summary>
+        /// 
+        /// <returns>string</returns>
+        public override string ToString() {
+            return Currency.ToString(this);
+        }
     }
 }

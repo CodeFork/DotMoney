@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetMoney", "NetMoney\NetMon
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetMoneyTests", "NetMoneyTests\NetMoneyTests.csproj", "{0AB86B8B-AD12-412B-ABC1-D01B5FACE32E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetMoneyEF", "NetMoneyEF\NetMoneyEF.csproj", "{425709D1-129A-4F55-8C9A-C2D82A75E3DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0AB86B8B-AD12-412B-ABC1-D01B5FACE32E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AB86B8B-AD12-412B-ABC1-D01B5FACE32E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AB86B8B-AD12-412B-ABC1-D01B5FACE32E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{425709D1-129A-4F55-8C9A-C2D82A75E3DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{425709D1-129A-4F55-8C9A-C2D82A75E3DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{425709D1-129A-4F55-8C9A-C2D82A75E3DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{425709D1-129A-4F55-8C9A-C2D82A75E3DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
