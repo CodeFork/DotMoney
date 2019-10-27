@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Money\Money.csproj" />
+    <ProjectReference Include="..\NetMoney\NetMoney.csproj" />
   </ItemGroup>
 
 </Project>
