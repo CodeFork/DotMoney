@@ -41,30 +41,17 @@ namespace DotMoney.Tests.Migrations
                                 .HasColumnName("Price")
                                 .HasColumnType("TEXT");
 
+                            b1.Property<string>("IsoCode")
+                                .IsRequired()
+                                .HasColumnName("Currency")
+                                .HasColumnType("TEXT");
+
                             b1.HasKey("ProductId");
 
                             b1.ToTable("Products");
 
                             b1.WithOwner()
                                 .HasForeignKey("ProductId");
-
-                            b1.OwnsOne("DotMoney.Currency", "Currency", b2 =>
-                                {
-                                    b2.Property<int>("MoneyProductId")
-                                        .HasColumnType("INTEGER");
-
-                                    b2.Property<string>("IsoCode")
-                                        .IsRequired()
-                                        .HasColumnName("Currency")
-                                        .HasColumnType("TEXT");
-
-                                    b2.HasKey("MoneyProductId");
-
-                                    b2.ToTable("Products");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("MoneyProductId");
-                                });
                         });
                 });
 #pragma warning restore 612, 618

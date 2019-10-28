@@ -7,8 +7,8 @@
     <RepositoryUrl>https://github.com/dakuenjery/DotMoney</RepositoryUrl>
     <PackageProjectUrl>https://github.com/dakuenjery/DotMoney</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Description>C# Money Value Type EFCore extensions</Description>
-    <Version>1.0.1</Version>
+    <Description>EntityFrameworkCore extensions for DotMoney</Description>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>

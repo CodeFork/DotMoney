@@ -8,16 +8,14 @@ namespace DotMoney.EFExtensions {
     public static class EFExtensions {
         public static EntityTypeBuilder<T> OwnsOneMoney<T>(this EntityTypeBuilder<T> builder,
                                                           [NotNull] Expression<Func<T, Money>> expression,
-                                                          string moneyAmountColumnName = "Price",
-                                                          string moneyCurrencyCodeColumnName = "Currency")
+                                                          [NotNull] string moneyAmountColumnName = "Price",
+                                                          [NotNull] string moneyCurrencyCodeColumnName = "Currency")
                 where T: class
         {
             return builder.OwnsOne(expression, m => {
                 m.Property(p => p.Amount).HasColumnName(moneyAmountColumnName).IsRequired(true);
-                m.OwnsOne(p => p.Currency, c => {
-                    c.Property(c => c.IsoCode).HasColumnName(moneyCurrencyCodeColumnName).IsRequired(true);
-                    c.Ignore(c => c.DisplayingSubType);
-                });
+                m.Property(c => c.IsoCode).HasColumnName(moneyCurrencyCodeColumnName).IsRequired(true);
+                m.Ignore(p => p.Currency);
             });
         }
     }

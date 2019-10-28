@@ -4,16 +4,16 @@ namespace DotMoney.Tests {
     public class MoneyTests {
         [Fact]
         public void CurrencyIsEqual() {
-            var cur1 = new Currency("BTC");
-            var cur2 = new Currency("BTC");
+            var cur1 = Currency.Get("BTC");
+            var cur2 = Currency.Get("BTC");
 
             Assert.Equal(cur1, cur2);
         }
 
         [Fact]
         public void CurrencyIsNotEqual() {
-            var cur1 = new Currency("HKD");
-            var cur2 = new Currency("BTC");
+            var cur1 = Currency.Get("HKD");
+            var cur2 = Currency.Get("BTC");
 
             Assert.NotEqual(cur1, cur2);
         }
@@ -106,6 +106,21 @@ namespace DotMoney.Tests {
             var result = m1 / 2;
 
             Assert.Equal(result, new Money(1.25m, "BTC"));
+        }
+
+        [Fact]
+        public void AddCurrencyTest() {
+            CurrencyTypeRepository.Register("QQQ", true, "QCurrency", "q");
+
+            var m1 = new Money(2.5m, "QQQ");
+            var m2 = new Money(2.5m, "QQQ");
+
+            Assert.Equal(new Money(5m, "QQQ"), m1 + m2);
+
+            var cur1 = Currency.Get("QQQ");
+            var cur2 = Currency.Get("USD");
+
+            Assert.NotEqual(cur1, cur2);
         }
     }
 }

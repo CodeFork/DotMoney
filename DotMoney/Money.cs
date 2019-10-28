@@ -2,20 +2,21 @@
 
 namespace DotMoney {
     public class Money : IEquatable<Money>, IComparable, IComparable<Money> {
-        public decimal Amount { get; private set; }
+        public decimal Amount { get; }
+        public string IsoCode { get; }
         public Currency Currency { get; }
-
-        protected Money() { }
 
         public Money(decimal amount, Currency currency) {
             AssertNotNull(currency);
             Amount = amount;
+            IsoCode = currency.IsoCode;
             Currency = currency;
         }
 
         public Money(decimal amount, string isoCode) {
             Amount = amount;
-            Currency = new Currency(isoCode.ToUpper());
+            IsoCode = isoCode;
+            Currency = Currency.Get(isoCode);
             AssertNotNull(Currency);
         }
 

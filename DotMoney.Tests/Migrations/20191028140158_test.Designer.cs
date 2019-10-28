@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotMoney.Tests.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20191028102613_initial")]
-    partial class initial
+    [Migration("20191028140158_test")]
+    partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,30 +43,17 @@ namespace DotMoney.Tests.Migrations
                                 .HasColumnName("Price")
                                 .HasColumnType("TEXT");
 
+                            b1.Property<string>("IsoCode")
+                                .IsRequired()
+                                .HasColumnName("Currency")
+                                .HasColumnType("TEXT");
+
                             b1.HasKey("ProductId");
 
                             b1.ToTable("Products");
 
                             b1.WithOwner()
                                 .HasForeignKey("ProductId");
-
-                            b1.OwnsOne("DotMoney.Currency", "Currency", b2 =>
-                                {
-                                    b2.Property<int>("MoneyProductId")
-                                        .HasColumnType("INTEGER");
-
-                                    b2.Property<string>("IsoCode")
-                                        .IsRequired()
-                                        .HasColumnName("Currency")
-                                        .HasColumnType("TEXT");
-
-                                    b2.HasKey("MoneyProductId");
-
-                                    b2.ToTable("Products");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("MoneyProductId");
-                                });
                         });
                 });
 #pragma warning restore 612, 618
