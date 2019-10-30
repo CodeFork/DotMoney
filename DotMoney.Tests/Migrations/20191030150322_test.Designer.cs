@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotMoney.Tests.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20191028140158_test")]
+    [Migration("20191030150322_test")]
     partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,6 +46,26 @@ namespace DotMoney.Tests.Migrations
                             b1.Property<string>("IsoCode")
                                 .IsRequired()
                                 .HasColumnName("Currency")
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("ProductId");
+
+                            b1.ToTable("Products");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProductId");
+                        });
+
+                    b.OwnsOne("DotMoney.Money", "Price2", b1 =>
+                        {
+                            b1.Property<int>("ProductId")
+                                .HasColumnType("INTEGER");
+
+                            b1.Property<decimal>("Amount")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("IsoCode")
+                                .IsRequired()
                                 .HasColumnType("TEXT");
 
                             b1.HasKey("ProductId");

@@ -22,7 +22,9 @@ namespace DotMoney.Tests {
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.Entity<Product>()
-                .OwnsOneMoney(p => p.Price);
+                .OwnsOneMoney(p => p.Price, "Price", "Currency")
+                .OwnsOneMoney(p => p.Price2);
+            
         }
     }
 
@@ -30,6 +32,7 @@ namespace DotMoney.Tests {
         public int Id { get; set; }
         public string Name { get; set; }
         public virtual Money Price { get; set; }
+        public virtual Money Price2 { get; set; }
     }
 
     public class EfTests {
@@ -56,6 +59,10 @@ namespace DotMoney.Tests {
 
                 Assert.Equal("Product 1", products[0].Name);
                 Assert.Equal(new Money(12.99m, "USD"), products[0].Price);
+
+                products[0].Price2 = products[0].Price * 2;
+
+                context.UpdateRange(products);
             }
         }
 

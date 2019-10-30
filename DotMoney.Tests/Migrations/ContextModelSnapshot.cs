@@ -53,6 +53,26 @@ namespace DotMoney.Tests.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("ProductId");
                         });
+
+                    b.OwnsOne("DotMoney.Money", "Price2", b1 =>
+                        {
+                            b1.Property<int>("ProductId")
+                                .HasColumnType("INTEGER");
+
+                            b1.Property<decimal>("Amount")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("IsoCode")
+                                .IsRequired()
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("ProductId");
+
+                            b1.ToTable("Products");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProductId");
+                        });
                 });
 #pragma warning restore 612, 618
         }

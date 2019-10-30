@@ -14,7 +14,9 @@ namespace DotMoney.Tests.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: false),
                     Price = table.Column<decimal>(nullable: true),
-                    Currency = table.Column<string>(nullable: true)
+                    Currency = table.Column<string>(nullable: true),
+                    Price2_Amount = table.Column<decimal>(nullable: true),
+                    Price2_IsoCode = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
