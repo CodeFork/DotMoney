@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Authors>dakuenjery@gmail.com</Authors>
+    <PackageTags>money, currency, decimal, DotMoney, EFCore, EntityFrameworkCore</PackageTags>
+    <RepositoryUrl>https://github.com/dakuenjery/DotMoney</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/dakuenjery/DotMoney</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description>EntityFrameworkCore extensions for DotMoney</Description>
+    <Version>1.0.4</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotMoney\DotMoney.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <Authors>dakuenjery@gmail.com</Authors>
+    <PackageTags>money, currency, decimal, DotMoney, EFCore, EntityFrameworkCore</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/dakuenjery/DotMoney</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/dakuenjery/DotMoney</RepositoryUrl>
+    <Description>C# Money type compatible with EntityFrameworkCore</Description>
+    <Version>1.0.3</Version>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <FileVersion>1.0.3.0</FileVersion>
+  </PropertyGroup>
+
+</Project>
